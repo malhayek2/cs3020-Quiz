@@ -16,17 +16,24 @@ class ViewController: UIViewController {
     "What comes after Red Green ...?"
     
     ]
-    let answer : [String] = [
+    /* typing a variblaes without a type
+     * inferTyping when we dont say its a string type
+    */
+    let answers = [
         "19",
         "Monday",
         "blue"
     ]
+    var currentQuestionIndex : Int = 0
     // controller stuff below
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let question : String = self.questions[self.currentQuestionIndex]
+        self.questionLabel.text = question
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,10 +42,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showNextQuestion(_ sender: UIButton) {
-        self.questionLabel.text = "What Color is the sky?"
+//        self.questionLabel.text = "What Color is the sky?"
+        self.currentQuestionIndex += 1
+        if(self.currentQuestionIndex == self.questions.count){
+            self.currentQuestionIndex = 0
+        }
+        let question : String = self.questions[self.currentQuestionIndex]
+        self.questionLabel.text = question
+        self.answerLabel.text = "????"
     }
     
     @IBAction func showAnswer(_ sender: UIButton) {
+        let answer = self.answers[self.currentQuestionIndex]
+        self.answerLabel.text = answer
+        
     }
 }
 
